@@ -9,7 +9,7 @@
 function TestHailstone() {
    console.log("Use this expression evaluator to ensure your hailstone implementation works.");
 	evaluateExpressions();
-	hailstone(17);
+	hailstone(27);
 }
 
 /*

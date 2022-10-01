@@ -28,9 +28,99 @@ function TestSternBrocotSequences() {
  * (in the hundreds).
  */
 
+let sbsChar = "";
 const DEFAULT_MAX_LENGTH = 500;
 function sbs(num, max) {
    if (max === undefined) max = DEFAULT_MAX_LENGTH; // second argument is missing? use 500 as a default
-   // replace the following line with your implementation, writing helper functions as necessary
-   return "";
+
+   let nL = 0;
+   let dL = 1;
+   let nR = 1;
+   let dR = 1;
+   let med = (nL + nR) / (dL + dR); // This value is 1/2
+   console.log(med);
+
+   let count = 1;
+   while (num !== med && count <= max) {
+      if (num > med) {
+         nL = (nL + nR);
+         dL = (dL + dR);
+         med = (nL + nR) / (dL + dR);
+         addToSbsChar("R");
+      }
+      else {
+         nR = (nL + nR);
+         dR = (dL + dR);
+         med = (nL + nR) / (dL + dR);
+         addToSbsChar("L");
+      }
+      count ++;
+   }
+
+   if (consecChar !== 1) {
+      sbsChar += consecChar;
+   }
+   let out = sbsChar;
+   sbsChar = "";
+   consecChar = 1;
+   lastChar = "";
+
+   return out;
+}
+
+/*
+ * Function: addToSbsChar
+ * -------------
+ * Modularizes the sbs function by isolating the algorithm for appending
+ * to the sbs output string. We assume the supplied input is a single
+ * letter string "L" or "R", and the returned string will adjust
+ * depending on the most recent entry to sbs.
+ */
+
+let lastChar = "";
+let consecChar = 1;
+
+function addToSbsChar(char) {
+
+   if (sbsChar === "") {
+      sbsChar += char;
+      lastChar = char;
+      return;
+   }
+
+   if (char === "L") {
+      if (char === lastChar) {
+         consecChar += 1;
+      }
+      else {
+         if (consecChar != 1) {
+            sbsChar += consecChar + " " + char;
+            lastChar = char;
+         }
+         else {
+            sbsChar += " " + char;
+            lastChar = char;
+         }
+         consecChar = 1;
+      }
+      return;
+   }
+
+   if (char === "R") {
+      if (char === lastChar) {
+         consecChar += 1;
+      }
+      else {
+         if (consecChar != 1) {
+            sbsChar += consecChar + " " + char;
+            lastChar = char;
+         }
+         else {
+            sbsChar += " " + char;
+            lastChar = char;
+         }
+         consecChar = 1;
+      }
+      return;
+   }
 }
