@@ -38,27 +38,23 @@ function DrawSamplerQuilt() {
  * --------------------------
  * Inserts all of the sampler quilt into the supplied graphics window.
  */
-let count = 1;
 function drawQuilt(gw) {
    let patch;
    for (let row = 0; row < NUM_ROWS; row++) {
       for (let col = 0; col < NUM_COLUMNS; col++) {
-         switch (count) {
+         let val = (((col+row) % 4 + 1));
+         switch (val) {
             case 1:
                patch = concentricCircles();
-               count += 1;
                break;
             case 2:
                patch = logCabin();
-               count += 1;
                break;
             case 3:
                patch = randomFlowerCirc();
-               count += 1;
                break;
             case 4:
                patch = sectLeader();
-               count = 1;
                break;
          }
          let x = col * PATCH_DIMENSION;
@@ -104,8 +100,8 @@ function concentricCircles() {
 function randomFlowerCirc() {
    let flowerBox = GCompound();
    let diameter = PATCH_DIMENSION * 2 / 5;
-   let startCorner = ((PATCH_DIMENSION / 2) - diameter) / 2
-   let centerCorner = (PATCH_DIMENSION - diameter) / 2
+   let startCorner = ((PATCH_DIMENSION / 2) - diameter) / 2;
+   let centerCorner = (PATCH_DIMENSION - diameter) / 2;
    flowerBox.add(GRect(PATCH_DIMENSION, PATCH_DIMENSION));
    for (let i = 0; i < 2; i++) {
       for (let j = 0; j < 2; j++) {
@@ -113,16 +109,16 @@ function randomFlowerCirc() {
          let y = startCorner + (PATCH_DIMENSION /2 * j);
          let circle = GOval(x, y, diameter, diameter);
          circle.setFilled(true);
-         circle.setFillColor(randomColor())
-         flowerBox.add(circle)
+         circle.setFillColor(randomColor());
+         flowerBox.add(circle);
       }
    }
    let centerCircle = GOval(centerCorner, centerCorner, diameter, diameter);
    centerCircle.setFilled(true);
-   centerCircle.setFillColor(randomColor())
-   flowerBox.add(centerCircle)
+   centerCircle.setFillColor(randomColor());
+   flowerBox.add(centerCircle);
 
-   return flowerBox
+   return flowerBox;
 }
 
 /*
