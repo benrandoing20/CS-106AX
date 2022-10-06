@@ -6,6 +6,10 @@
  * card number according to Luhn's algorithm.
  *
  * Modified by Ben Randoing 09/29/2022
+ *
+ * A small code segment was modified to resemble that provided by my Intro
+ * Feedback in the function isValid. My original code without TA help was
+ * submitted in assignment 0.
  */
 
 "use strict";
@@ -34,19 +38,14 @@ function isValid(number) {
 
 	while (number > 0) {
 		let currentDigit = number % 10;
-		if (odd) {
-			luhnSum += currentDigit;
-			odd = false;
+		if (!odd) {
+			currentDigit *= 2;
 		}
-		else {
-			if (2*currentDigit > 9){
-				luhnSum += (2*currentDigit)-9;
-			}
-			else {
-				luhnSum += (2*currentDigit);
-			}
-			odd = true;
+		if (currentDigit > 9) {
+			currentDigit -= 9;
 		}
+		luhnSum += currentDigit;
+		odd = !odd;
 		number = Math.floor(number/10);
 	}
 	return luhnSum % 10 === 0;

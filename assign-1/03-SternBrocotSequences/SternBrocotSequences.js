@@ -38,7 +38,6 @@ function sbs(num, max) {
    let nR = 1;
    let dR = 1;
    let med = (nL + nR) / (dL + dR); // This value is 1/2
-   console.log(med);
 
    let count = 1;
    while (num !== med && count <= max) {
@@ -93,7 +92,7 @@ function addToSbsChar(char) {
          consecChar += 1;
       }
       else {
-         if (consecChar != 1) {
+         if (consecChar !== 1) {
             sbsChar += consecChar + " " + char;
             lastChar = char;
          }
@@ -111,7 +110,7 @@ function addToSbsChar(char) {
          consecChar += 1;
       }
       else {
-         if (consecChar != 1) {
+         if (consecChar !== 1) {
             sbsChar += consecChar + " " + char;
             lastChar = char;
          }

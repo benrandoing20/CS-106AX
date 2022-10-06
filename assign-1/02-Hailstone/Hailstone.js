@@ -9,7 +9,7 @@
 function TestHailstone() {
    console.log("Use this expression evaluator to ensure your hailstone implementation works.");
 	evaluateExpressions();
-	hailstone(27);
+	hailstone(15);
 }
 
 /*
@@ -20,7 +20,7 @@ function TestHailstone() {
  */
 function hailstone(n) {
 	let count = 0;
-	while (n != 1) {
+	while (n !== 1) {
 		if (n % 2 === 0) {
 			let n_old = n
 			n /= 2;
