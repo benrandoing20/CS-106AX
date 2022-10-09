@@ -176,7 +176,26 @@ function sectLeader() {
    let segmentNumber = 9; // Must be 3 or greater
    let shortLen = PATCH_DIMENSION / segmentNumber;
    leader.add(GRect(PATCH_DIMENSION, PATCH_DIMENSION));
-   leader.add(GImage("http://web.stanford.edu/class/cs106ax/img/jonathan.png"));
+   let num = randomInteger(1,5);
+   let ta = ""
+   switch (num) {
+      case 1:
+         ta = "jonathan"
+         break;
+      case 2:
+         ta = "avi"
+         break;
+      case 3:
+         ta = "sophie"
+         break;
+      case 4:
+         ta = "ryan"
+         break;
+      case 5:
+         ta = "stephan"
+         break;
+   }
+   leader.add(GImage("http://web.stanford.edu/class/cs106ax/img/" + ta + ".png"));
 
    for (let i = 0; i < 2; i++) {
       let startCorner = i * shortLen;
