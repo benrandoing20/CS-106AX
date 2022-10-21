@@ -1,7 +1,16 @@
-/*
+/**
  * File: Breakout.js
  * -----------------
  * This program implements the Breakout game.
+ *
+ * Modified by Ben Randoing 10/9/2022
+ *
+ * Additional functionalities are included as follow
+ *
+ * Increased ball speed over time
+ * Added text helping navigate the game
+ * Score counters
+ *
  */
 "use strict";
 
@@ -32,11 +41,24 @@ const BALL_SIZE = BRICK_WIDTH / BRICK_TO_BALL_RATIO;
 
 /* Main program */
 
+/**
+ * Function: Breakout
+ * -------------
+ * Runs the game Breakout. This implementation implements closures opposed
+ * to modular functions as recommended but also for practice with closures.
+ */
 function Breakout() {
     let gw = GWindow(GWINDOW_WIDTH, GWINDOW_HEIGHT);
     let numBricks = N_ROWS * N_COLS;
     let introMsg;
-    let createBricks = function(e) {
+
+    /**
+     * Function: createBricks
+     * -------------
+     * Creates the N_ROWS by N_COLS brick formation. The color of the
+     * bricks cycles through 5 color options every other row
+     */
+    let createBricks = function() {
         let x0 = BRICK_SEP;
         let y0 = GWINDOW_HEIGHT * TOP_FRACTION;
         const colors = ["Red", "Red", "Orange", "Orange", "Yellow", "Yellow", "Cyan", "Cyan", "Blue", "Blue"];
@@ -56,6 +78,11 @@ function Breakout() {
     };
 
     let paddle = null;
+    /**
+     * Function: createPaddle
+     * -------------
+     * Establishes the paddles with the specified dimensions as constants
+     */
     let createPaddle = function() {
         let PADDLE_X = (GWINDOW_WIDTH-PADDLE_WIDTH)/2;
         paddle = GRect(PADDLE_X, PADDLE_Y, PADDLE_WIDTH, PADDLE_HEIGHT);
@@ -63,6 +90,15 @@ function Breakout() {
         gw.add(paddle);
     };
 
+    /**
+     * Function: movePaddle
+     * -------------
+     * Adjusts the position of the paddle as the mouse is moved within
+     * the GWindow
+     *
+     * @param e Information regarding a mousemove event from an event
+     * listener
+     */
     let movePaddle = function(e) {
         if (paddle !== null){
             let X_ADJUST = e.getX();
@@ -73,9 +109,14 @@ function Breakout() {
     };
 
     let ball = null;
-    let ballsUsed = 0;
+    let ballsUsed = 0; // A count variable to know when 3 balls have been used
     let ballMsg;
     let loseMsg;
+    /**
+     * Function: createBall
+     * -------------
+     * Creates a circular ball
+     */
     let createBall = function() {
         let X0 = (GWINDOW_WIDTH - BALL_SIZE) / 2;
         let Y0 = (GWINDOW_HEIGHT - BALL_SIZE) / 2;
@@ -94,15 +135,30 @@ function Breakout() {
 
     };
 
+    /*
+    Below the X and Y velocities are initialized provided constants above
+     */
     let X_VELO = randomReal(MIN_X_VELOCITY, MAX_X_VELOCITY);
     if (randomChance()) X_VELO = -X_VELO;
     let Y_VELO = INITIAL_Y_VELOCITY;
+
     let timer = 0;
     let winMsg;
     let hits = 0;
     let score = 0;
     let scoreMsg = GLabel("Score: 0", (GWINDOW_WIDTH-60), 20);
     gw.add(scoreMsg);
+
+    /**
+     * Function: moveBall
+     * -------------
+     * Once a click is registered the ball is moved. X and Y velocities are
+     * adjusted if the top, side walls, a brick, or the paddle are encountered.
+     * A new ball is created if the ball encounters the bottom wall.
+     *
+     * @param e Information regarding a click event from an event
+     * listener
+     */
     let moveBall = function(e) {
         if (timer === 0) {
             gw.remove(ballMsg);
@@ -125,12 +181,13 @@ function Breakout() {
 
                     const collider = getCollidingObject();
                     if (collider === paddle) {
-                        Y_VELO = -Y_VELO;
+                        if (Y_VELO > 0) { // Prevent ball and paddle glitch
+                            Y_VELO = -Y_VELO;
                         hits += 1;
                         if (hits % 10 === 0) {
                             Y_VELO *= 1.2;
+                            }
                         }
-
                     }
                     else {
                         gw.remove(collider);
@@ -155,6 +212,15 @@ function Breakout() {
         }
     };
 
+    /**
+     * Function: getCollidingObject
+     * -------------
+     * Determines if after each step of the ball if the ball is contacting
+     * another GObject
+     *
+     * @returns {elem} The GObject in contact with the ball. Is null
+     * if no multi-GObject contact
+     */
     let getCollidingObject = function() {
         for(let i = 0; i < 2; i++){
             for (let j = 0; j < 2; j++){
@@ -169,9 +235,16 @@ function Breakout() {
                 return;
             }
         }
-    }
+    };
 
 
+    /*
+    Three single instance timeout statements are implemented to create the
+    initial components: Bricks, Paddle, Ball #1
+
+    There are event listeners for a click to start the ballMove function and
+    mousemove to allow for paddle manipulation
+     */
     setTimeout(createBricks, 0);
     setTimeout(createPaddle, 0);
     setTimeout(createBall, 0);
