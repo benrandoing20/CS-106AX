@@ -187,6 +187,7 @@ function Wordle() {
       if (isEnglishWord(guesses[currentWord]) && !win) {
         if (guesses[currentWord] === secretWord) {
           win = true;
+          alertKey =1;
         } else if (currentWord === 5) {
           lose = true;
           alertKey = 3;
@@ -454,6 +455,7 @@ let makeGrid = function(gw, strings, secret, enter, alertKey) {
     }
   }
   gw.add(grid, 0, 0);
+  return
 };
 
 /**
