@@ -1,0 +1,24 @@
+/*
+ * File: collapsible-list.css
+ * --------------------------
+ * Defines the small set of CSS rules needed for the
+ * collapsible-list application.
+ */
+
+li {
+ list-style-image: none;
+ list-style-type: circle;
+}
+
+.open {
+ list-style-type: none;
+ list-style-image: url("down-arrow.png")
+}
+.closed {
+ list-style-type: none;
+ list-style-image: url("right-arrow.png")
+}
+
+.closed ul {
+ display: none;
+}

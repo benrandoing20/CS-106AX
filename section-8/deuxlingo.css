@@ -1,0 +1,32 @@
+/**
+ * File: deuxlingo.css
+ * -------------------
+ * Provides all of the styling necessary to
+ * present the Deuxlingo application.
+ */
+
+.main-content {
+   text-align: center;
+   vertical-align: center;
+}
+
+.text-editable {
+   resize: none;
+   outline: none;
+}
+
+.text-region {
+   height: 300px;
+   width: 400px;
+   font: 16px 'Times New Roman',Times;
+   display: inline-block;
+   border: 1px solid;
+   text-align: left;
+   padding: 5px;
+   overflow: hidden;
+   margin: 5px;
+}
+
+.invisible {
+   display: none;
+}

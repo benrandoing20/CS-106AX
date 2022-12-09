@@ -152,6 +152,10 @@ class AdvGame:
                 lastActionFlag = True
                 continue
             elif verb == "TAKE":
+                if objects[objAction].getFlexibility() == "fixed":
+                    print(objAction + " cannot be taken.")
+                    lastActionFlag = True
+                    continue
                 if objAction in room.getContents():
                     self._playerObjects.append(objAction)
                     room.removeObject(objAction)

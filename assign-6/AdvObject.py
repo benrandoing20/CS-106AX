@@ -14,11 +14,12 @@ This module defines a class that models an object in Adventure.
 
 class AdvObject:
 
-    def __init__(self, name, description, location):
+    def __init__(self, name, description, location, flexibility):
         """Creates an AdvObject from the specified properties."""
         self._name = name
         self._description = description
         self._location = location
+        self._flexibility = flexibility
 
     def getName(self):
         """Returns the name of this object."""
@@ -32,10 +33,15 @@ class AdvObject:
         """Returns the initial location of this object."""
         return self._location
 
+    def getFlexibility(self):
+        """Returns the flexibility of the object."""
+        return self._flexibility
+
     @staticmethod
     def readObject(f):
         """Reads and returns the next object from the file."""
         name = f.readline().rstrip()
+        flexibility = f.readline().rstrip()
         if name == "":
             return None
         description = f.readline().rstrip()
@@ -43,4 +49,4 @@ class AdvObject:
             line = f.readline().rstrip()
             if line == "": break
             location = line
-        return AdvObject(name, description, location)
+        return AdvObject(name, description, location, flexibility)

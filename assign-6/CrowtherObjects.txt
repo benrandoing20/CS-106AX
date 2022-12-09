@@ -1,47 +1,64 @@
 KEYS
+free
 a set of keys
 InsideBuilding
 
 LAMP
+free
 a brightly shining brass lamp
 BeneathGrate
 
 ROD
+free
 a black rod with a rusty star
 DebrisRoom
 
 WATER
+free
 a bottle of water
 PLAYER
 
 BIRD
+free
 a little bird
 OrangeStoneChamber1
 
 NUGGET
+free
 a nugget of gold
 NuggetRoom
 
 DIAMOND
+free
 a sparkling diamond
 WestBankOfFissure
 
 COINS
+free
 a bag of coins
 EastSideChamber
 
 EMERALD
+free
 an emerald the size of a plover's egg
 EmeraldRoom
 
 EGGS
+free
 a nest of golden eggs
 GiantRoom
 
 PLANT
+free
 a small plant murmuring "Water, water"
 WestPit
 
 CHEST
+free
 a pirate chest
 PirateLair
+
+GRATE
+fixed
+a fixed metal grate
+OutsideGrate
